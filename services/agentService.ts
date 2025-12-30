@@ -2,8 +2,7 @@ import { PlannerFormData, AgentResponse } from '../types';
 
 // The backend does not handle OPTIONS preflight requests (returns 405),
 // so we use a CORS proxy to wrap the request. 
-const TARGET_URL = 'https://fastapidemo-mihx.onrender.com/agent';
-const API_URL = `https://corsproxy.io/?${encodeURIComponent(TARGET_URL)}`;
+const TARGET_URL = 'https://fastapidemo-mihx.onrender.com/agent/email';
 
 // Set a timeout (60 seconds) - assuming the backend acknowledges quickly before sending email async
 // If backend is still synchronous but just slow, we might need a longer timeout, 
@@ -13,7 +12,7 @@ const REQUEST_TIMEOUT_MS = 60 * 1000;
 export const fetchHolidayPlan = async (formData: PlannerFormData): Promise<AgentResponse> => {
   // Construct the natural language query
   const parts = [];
-  parts.push(`Make a holiday plan for ${formData.city}`);
+  parts.push(`Make a 2 or 3 days holiday plan for ${formData.city}`);
   
   if (formData.date) {
     parts.push(`starting on ${formData.date}`);
@@ -42,7 +41,7 @@ export const fetchHolidayPlan = async (formData: PlannerFormData): Promise<Agent
   const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(TARGET_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
