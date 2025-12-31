@@ -76,7 +76,7 @@ const PlannerForm: React.FC<PlannerFormProps> = ({ onSubmit, isLoading }) => {
               required
               value={formData.city}
               onChange={handleChange}
-              placeholder="e.g. Baltimore, Tokyo"
+              placeholder="e.g. Baltimore, San Jose"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all placeholder:text-gray-400"
             />
           </div>
